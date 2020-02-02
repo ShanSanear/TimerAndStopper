@@ -2,7 +2,13 @@ import sys
 
 from PyQt5 import QtCore, QtWidgets
 
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QGridLayout
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QGridLayout, QLCDNumber
+
+
+class Numerical(QLCDNumber):
+    def __init__(self, parent):
+        super(Numerical, self).__init__(parent)
+        self.setSegmentStyle(QLCDNumber.Filled)
 
 
 class MainWindow(QMainWindow):
@@ -14,9 +20,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(main_widget)
         self.main_layout = QGridLayout(self)
         main_widget.setLayout(self.main_layout)
-        self.label = QLabel("This is first label", self)
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.main_layout.addWidget(self.label, 0, 0)
+        self.numerical = Numerical(self)
+        self.main_layout.addWidget(self.numerical, 0, 0)
 
 
 if __name__ == '__main__':

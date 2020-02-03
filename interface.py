@@ -1,8 +1,8 @@
+import logging
 import sys
 from typing import Union
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QLCDNumber, QPushButton, QVBoxLayout, QHBoxLayout
 
 
@@ -43,13 +43,11 @@ class SegDisplayWithButtons:
         self.buttons.up_button.clicked.connect(self.increment)
         self.buttons.down_button.clicked.connect(self.decrement)
 
-    @pyqtSlot
     def increment(self):
-        pass
+        logging.debug("Incrementing")
 
-    @pyqtSlot
     def decrement(self):
-        pass
+        logging.debug("Decrementing")
 
 
 class MainWindow(QMainWindow):
@@ -70,6 +68,9 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                        datefmt='%m-%d %H:%M', )
     app = QtWidgets.QApplication(sys.argv)
     main_win = MainWindow()
     main_win.show()

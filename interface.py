@@ -2,13 +2,24 @@ import sys
 
 from PyQt5 import QtCore, QtWidgets
 
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QGridLayout, QLCDNumber
+from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QGridLayout, QLCDNumber, QPushButton, QVBoxLayout
 
 
 class Numerical(QLCDNumber):
     def __init__(self, parent):
         super(Numerical, self).__init__(parent)
         self.setSegmentStyle(QLCDNumber.Filled)
+
+class UpDownButtons:
+    def __init__(self, parent, display):
+        self.central_widget = QWidget(parent)
+        self.layout = QVBoxLayout(self.central_widget)
+        self.central_widget.setLayout(self.layout)
+        self.up_button = QPushButton(parent=self.central_widget, text='+')
+        self.down_button = QPushButton(parent=self.central_widget, text='-')
+        self.layout.addWidget(self.up_button)
+        self.layout.addWidget(self.down_button)
+        self.display_ref = display
 
 
 class MainWindow(QMainWindow):

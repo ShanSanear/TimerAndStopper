@@ -1,8 +1,7 @@
 import sys
 
-from PyQt5 import QtCore, QtWidgets
-
-from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QGridLayout, QLCDNumber, QPushButton, QVBoxLayout
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QLCDNumber, QPushButton, QVBoxLayout, QHBoxLayout
 
 
 class SegmentalDisplay(QLCDNumber):
@@ -10,13 +9,14 @@ class SegmentalDisplay(QLCDNumber):
         super(SegmentalDisplay, self).__init__(parent)
         self.setSegmentStyle(QLCDNumber.Filled)
 
+
 class UpDownButtons:
     def __init__(self, parent, display):
-        self.central_widget = QWidget(parent)
-        self.layout = QVBoxLayout(self.central_widget)
-        self.central_widget.setLayout(self.layout)
-        self.up_button = QPushButton(parent=self.central_widget, text='+')
-        self.down_button = QPushButton(parent=self.central_widget, text='-')
+        self.widget = QWidget(parent)
+        self.layout = QVBoxLayout(self.widget)
+        self.widget.setLayout(self.layout)
+        self.up_button = QPushButton(parent=self.widget, text='+')
+        self.down_button = QPushButton(parent=self.widget, text='-')
         self.layout.addWidget(self.up_button)
         self.layout.addWidget(self.down_button)
         self.display_ref = display
@@ -36,10 +36,9 @@ class MainWindow(QMainWindow):
         self.minutes = SegmentalDisplay(self)
         self.seconds = SegmentalDisplay(self)
         self.main_layout.addWidget(self.hours, 0, 0)
-        self.main_layout.addWidget(self.hours_buttons.central_widget, 0, 1)
+        self.main_layout.addWidget(self.hours_buttons.widget, 0, 1)
         self.main_layout.addWidget(self.minutes, 0, 2)
         self.main_layout.addWidget(self.seconds, 0, 3)
-
 
 
 if __name__ == '__main__':

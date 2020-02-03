@@ -2,6 +2,7 @@ import sys
 from typing import Union
 
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QLCDNumber, QPushButton, QVBoxLayout, QHBoxLayout
 
 
@@ -39,10 +40,14 @@ class SegDisplayWithButtons:
         self.buttons = UpDownButtons(self.widget, self._display)
         self._layout.addWidget(self._display)
         self._layout.addWidget(self.buttons.widget)
+        self.buttons.up_button.clicked.connect(self.increment)
+        self.buttons.down_button.clicked.connect(self.decrement)
 
+    @pyqtSlot
     def increment(self):
         pass
 
+    @pyqtSlot
     def decrement(self):
         pass
 

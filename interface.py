@@ -19,7 +19,17 @@ class UpDownButtons:
         self.down_button = QPushButton(parent=self.widget, text='-')
         self.layout.addWidget(self.up_button)
         self.layout.addWidget(self.down_button)
-        self.display_ref = display
+        self._display = display
+
+
+class SegDisplayWithButtons:
+    def __init__(self, parent):
+        self._widget = QWidget(parent)
+        self._layout = QHBoxLayout(self._widget)
+        self._display = SegmentalDisplay(parent)
+        self.buttons = UpDownButtons(self._widget, self._display)
+        self._layout.addWidget(self._display)
+        self._layout.addWidget(self.buttons.widget)
 
 
 class MainWindow(QMainWindow):

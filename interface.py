@@ -32,10 +32,11 @@ class UpDownButtons:
 
 class SegDisplayWithButtons:
     def __init__(self, parent):
-        self._widget = QWidget(parent)
-        self._layout = QHBoxLayout(self._widget)
+        self.widget = QWidget(parent)
+        self._layout = QHBoxLayout(self.widget)
         self._display = SegmentalDisplay(parent)
-        self.buttons = UpDownButtons(self._widget, self._display)
+        self._display.setDigitCount(2)
+        self.buttons = UpDownButtons(self.widget, self._display)
         self._layout.addWidget(self._display)
         self._layout.addWidget(self.buttons.widget)
 
@@ -44,19 +45,19 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Timer and stopwatch app")
-        self.resize(400, 500)
+        self.resize(300, 100)
         main_widget = QWidget(self)
         self.setCentralWidget(main_widget)
         self.main_layout = QGridLayout(self)
         main_widget.setLayout(self.main_layout)
-        self.hours = SegmentalDisplay(self)
-        self.hours_buttons = UpDownButtons(main_widget, self.hours)
-        self.minutes = SegmentalDisplay(self)
-        self.seconds = SegmentalDisplay(self)
-        self.main_layout.addWidget(self.hours, 0, 0)
-        self.main_layout.addWidget(self.hours_buttons.widget, 0, 1)
-        self.main_layout.addWidget(self.minutes, 0, 2)
-        self.main_layout.addWidget(self.seconds, 0, 3)
+        self.hours = SegDisplayWithButtons(self)
+        # self.hours_buttons = UpDownButtons(main_widget, self.hours)
+        self.minutes = SegDisplayWithButtons(self)
+        # self.seconds = SegmentalDisplay(self)
+        self.main_layout.addWidget(self.hours.widget, 0, 0)
+        # self.main_layout.addWidget(self.hours_buttons.widget, 0, 1)
+        self.main_layout.addWidget(self.minutes.widget, 0, 1)
+        # self.main_layout.addWidget(self.seconds, 0, 3)
 
 
 if __name__ == '__main__':

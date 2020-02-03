@@ -40,6 +40,12 @@ class SegDisplayWithButtons:
         self._layout.addWidget(self._display)
         self._layout.addWidget(self.buttons.widget)
 
+    def increment(self):
+        pass
+
+    def decrement(self):
+        pass
+
 
 class MainWindow(QMainWindow):
     def __init__(self):

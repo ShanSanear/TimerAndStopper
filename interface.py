@@ -57,13 +57,11 @@ class MainWindow(QMainWindow):
         self.main_layout = QGridLayout(self)
         main_widget.setLayout(self.main_layout)
         self.hours = SegDisplayWithButtons(self)
-        # self.hours_buttons = UpDownButtons(main_widget, self.hours)
         self.minutes = SegDisplayWithButtons(self)
-        # self.seconds = SegmentalDisplay(self)
+        self.seconds = SegDisplayWithButtons(self)
         self.main_layout.addWidget(self.hours.widget, 0, 0)
-        # self.main_layout.addWidget(self.hours_buttons.widget, 0, 1)
         self.main_layout.addWidget(self.minutes.widget, 0, 1)
-        # self.main_layout.addWidget(self.seconds, 0, 3)
+        self.main_layout.addWidget(self.seconds.widget, 0, 2)
 
 
 if __name__ == '__main__':

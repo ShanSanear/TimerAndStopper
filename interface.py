@@ -11,12 +11,27 @@ class SegmentalDisplay(QLCDNumber):
         super(SegmentalDisplay, self).__init__(parent)
         self.setDigitCount(2)
         self.display(2)
+        self.setSegmentStyle(QLCDNumber.Flat)
 
     def display(self, val: Union[str, int]) -> None:
         if isinstance(val, int):
             super(SegmentalDisplay, self).display("%02d" % val)
         else:
             super(SegmentalDisplay, self).display(val)
+
+    def increment(self):
+        val = self.intValue() + 1
+        if val > 99:
+            logging.info("Value exceeding 99 limit")
+            return
+        self.display(val)
+
+    def decrement(self):
+        val = self.intValue() - 1
+        if val < 0:
+            logging.info("Negative value")
+            return
+        self.display(val)
 
 
 class UpDownButtons:
@@ -45,9 +60,11 @@ class SegDisplayWithButtons:
 
     def increment(self):
         logging.debug("Incrementing")
+        self._display.increment()
 
     def decrement(self):
         logging.debug("Decrementing")
+        self._display.decrement()
 
 
 class MainWindow(QMainWindow):

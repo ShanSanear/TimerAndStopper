@@ -1,4 +1,5 @@
 import sys
+from typing import Union
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QLCDNumber, QPushButton, QVBoxLayout, QHBoxLayout
@@ -7,7 +8,14 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QLCDNumber, QPush
 class SegmentalDisplay(QLCDNumber):
     def __init__(self, parent):
         super(SegmentalDisplay, self).__init__(parent)
-        self.setSegmentStyle(QLCDNumber.Filled)
+        self.setDigitCount(2)
+        self.display(2)
+
+    def display(self, val: Union[str, int]) -> None:
+        if isinstance(val, int):
+            super(SegmentalDisplay, self).display("%02d" % val)
+        else:
+            super(SegmentalDisplay, self).display(val)
 
 
 class UpDownButtons:

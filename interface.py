@@ -5,9 +5,9 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QLabel, QWidget, QGridLayout, QLCDNumber, QPushButton, QVBoxLayout
 
 
-class Numerical(QLCDNumber):
+class SegmentalDisplay(QLCDNumber):
     def __init__(self, parent):
-        super(Numerical, self).__init__(parent)
+        super(SegmentalDisplay, self).__init__(parent)
         self.setSegmentStyle(QLCDNumber.Filled)
 
 class UpDownButtons:
@@ -31,8 +31,15 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(main_widget)
         self.main_layout = QGridLayout(self)
         main_widget.setLayout(self.main_layout)
-        self.numerical = Numerical(self)
-        self.main_layout.addWidget(self.numerical, 0, 0)
+        self.hours = SegmentalDisplay(self)
+        self.hours_buttons = UpDownButtons(main_widget, self.hours)
+        self.minutes = SegmentalDisplay(self)
+        self.seconds = SegmentalDisplay(self)
+        self.main_layout.addWidget(self.hours, 0, 0)
+        self.main_layout.addWidget(self.hours_buttons.central_widget, 0, 1)
+        self.main_layout.addWidget(self.minutes, 0, 2)
+        self.main_layout.addWidget(self.seconds, 0, 3)
+
 
 
 if __name__ == '__main__':
